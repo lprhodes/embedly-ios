@@ -102,7 +102,7 @@
     NSString *displayQuery = @"?";
     NSString *param;
     for (id key in params) {
-        NSString *paramValue = arams[key]; //[ stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+        NSString *paramValue = params[key]; //[ stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
         if ([displayQuery length] == 1) {
             displayQuery = [NSString stringWithFormat:@"?%@=%@", key, paramValue];
         } else {
