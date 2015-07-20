@@ -93,9 +93,9 @@
 - (NSString *)buildEmbedlyUrl:(NSString *)endpoint withParams:(NSDictionary *)params {
     NSString *embedlyUrl;
     if ([endpoint hasPrefix:@"/1/display"]) {
-        embedlyUrl = [NSString stringWithFormat:@"http://i.embed.ly%@", endpoint];
+        embedlyUrl = [NSString stringWithFormat:@"https://i.embed.ly%@", endpoint];
     } else {
-        embedlyUrl = [NSString stringWithFormat:@"http://api.embed.ly%@", endpoint];
+        embedlyUrl = [NSString stringWithFormat:@"https://api.embed.ly%@", endpoint];
     }
     
     
