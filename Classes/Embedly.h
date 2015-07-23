@@ -22,7 +22,7 @@
  @param endpoint The Embedly API endpoint used by the API call.
  @param operation Additional information about the HTTP call.
 */
-- (void)embedlySuccess:(NSString *)callUrl withResponse:(id)response endpoint:(NSString *)endpoint operation:(AFHTTPRequestOperation *)operation;
+- (void)embedlySuccess:(NSString *)callUrl withResponse:(id)response endpoint:(NSString *)endpoint operation:(AFHTTPRequestOperation *)operation identifier:(NSString *)identifier;
 /**
  embedlyFailure is called if there is some issue with the Embedly HTTP call
  
@@ -31,7 +31,7 @@
  @param endpoint The Embedly API endpoint used by the API call.
  @param operation Additional information about the HTTP call.
  */
-- (void)embedlyFailure:(NSString *)callUrl withError:(NSError *)error endpoint:(NSString *)endpoint operation:(AFHTTPRequestOperation *)operation;
+- (void)embedlyFailure:(NSString *)callUrl withError:(NSError *)error endpoint:(NSString *)endpoint operation:(AFHTTPRequestOperation *)operation identifier:(NSString *)identifier;
 
 @end
 
@@ -46,7 +46,7 @@
  Your Embedly API key. Get it for free at:
  
  https://app.embed.ly/signup
-*/
+ */
 @property NSString *key;
 
 /**
@@ -63,7 +63,16 @@
  @param callEmbed the URL to be passed to the Embedly Embed API
  @param params Embedly Embed API parameters. See http://embed.ly/docs/embed/api/arguments
  @param optimizeImages Pass a width in pixels, and all image URLs in the API response will be replaced with Embedly Display URLs to images resized to the given width. Pass 0 to disable this.
-*/
+ */
+- (NSString *)callEmbed:(NSString *)url params:(NSDictionary *)params optimizeImages:(NSInteger)width identifier:(NSString *)identifier;
+
+/**
+ Call the Embedly Embed API
+ 
+ @param callEmbed the URL to be passed to the Embedly Embed API
+ @param params Embedly Embed API parameters. See http://embed.ly/docs/embed/api/arguments
+ @param optimizeImages Pass a width in pixels, and all image URLs in the API response will be replaced with Embedly Display URLs to images resized to the given width. Pass 0 to disable this.
+ */
 - (NSString *)callEmbed:(NSString *)url params:(NSDictionary *)params optimizeImages:(NSInteger)width;
 
 /**
