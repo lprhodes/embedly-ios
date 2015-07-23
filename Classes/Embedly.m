@@ -20,6 +20,10 @@
 /* API stuff */
 
 - (NSString *)callEmbed:(NSString *)url params:(NSDictionary *)params optimizeImages:(NSInteger)width {
+    [self callEmbed:url params:params optimizeImages:width identifier:nil];
+}
+
+- (NSString *)callEmbed:(NSString *)url params:(NSDictionary *)params optimizeImages:(NSInteger)width identifier:(NSString *)identifier {
     NSMutableDictionary *completeParams = [NSMutableDictionary dictionaryWithDictionary:params];
     [completeParams setObject:self.key forKey:@"key"];
     [completeParams setObject:url forKey:@"url"];
@@ -27,7 +31,7 @@
         [completeParams setObject:[NSString stringWithFormat:@"%ld", (long)width] forKey:@"image_width"];
     }
     
-    return [self fetchEmbedlyApi:@"/1/oembed" withParams:completeParams];
+    return [self fetchEmbedlyApi:@"/1/oembed" withParams:completeParams identifier:identifier];
 }
 
 - (NSString *)callExtract:(NSString *)url params:(NSDictionary *)params optimizeImages:(NSInteger)width {
@@ -114,7 +118,12 @@
     return [NSString stringWithFormat:@"%@%@", embedlyUrl, displayQuery];
 }
 
-- (NSString *)fetchEmbedlyApi:(NSString *)endpoint withParams:(NSDictionary *)params {
+- (NSString *)fetchEmbedlyApi:(NSString *)endpoint withParams:(NSDictionary *)params
+{
+    [self fetchEmbedlyApi:endpoint withParams:params identifier:nil];
+}
+
+- (NSString *)fetchEmbedlyApi:(NSString *)endpoint withParams:(NSDictionary *)params identifier:(NSString *)identifier {
     NSString *embedlyUrl = [self buildEmbedlyUrl:endpoint withParams:params];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -124,9 +133,9 @@
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
     [manager GET:embedlyUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [[self delegate] embedlySuccess:embedlyUrl withResponse:responseObject endpoint:endpoint operation:operation];
+        [[self delegate] embedlySuccess:embedlyUrl withResponse:responseObject endpoint:endpoint operation:operation identifier:identifier];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [[self delegate] embedlyFailure:embedlyUrl withError:error endpoint:endpoint operation:operation];
+        [[self delegate] embedlyFailure:embedlyUrl withError:error endpoint:endpoint operation:operation identifier:identifier];
     }];
     
     return embedlyUrl;
