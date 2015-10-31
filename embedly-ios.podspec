@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "embedly-ios"
-  s.version          = "1.0.3"
+  s.version          = "1.0.4"
   s.summary          = "An iOS library for interacting with Embedly's suite of APIs."
   s.description      = <<-DESC
 			An iOS library for interacting with Embedly's suite of APIs.

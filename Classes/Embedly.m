@@ -11,8 +11,13 @@
 @implementation Embedly
 
 - (id)initWithKey:(NSString *)key delegate:(id)delegate {
-    self.key = key;
-    self.delegate = delegate;
+    
+    self = [super init];
+    
+    if (self) {
+        self.key = key;
+        self.delegate = delegate;
+    }
     
     return self;
 }
@@ -20,7 +25,7 @@
 /* API stuff */
 
 - (NSString *)callEmbed:(NSString *)url params:(NSDictionary *)params optimizeImages:(NSInteger)width {
-    [self callEmbed:url params:params optimizeImages:width identifier:nil];
+    return [self callEmbed:url params:params optimizeImages:width identifier:nil];
 }
 
 - (NSString *)callEmbed:(NSString *)url params:(NSDictionary *)params optimizeImages:(NSInteger)width identifier:(NSString *)identifier {

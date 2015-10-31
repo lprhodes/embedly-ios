@@ -40,14 +40,14 @@
 /**
  Holds the object which implements the EmbedlyDelegate protocol, which receives the responses to API calls.
 */
-@property id delegate;
+@property (weak, nonatomic) id delegate;
 
 /**
  Your Embedly API key. Get it for free at:
  
  https://app.embed.ly/signup
  */
-@property NSString *key;
+@property (copy, nonatomic) NSString *key;
 
 /**
  Embedly initializer
